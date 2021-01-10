@@ -1,6 +1,7 @@
 
+//AJAX REQ
 function fetchRandomDogImg(){
-
+/*
 // 1. MAKE A XML HTTP REQUEST
 
  var xhrRequest = new XMLHttpRequest();  // created the obj
@@ -22,11 +23,20 @@ function fetchRandomDogImg(){
  /* 1.3rd para denotes a boolean val.  2.want req to be async or not 3. T-> async F->sync  4. default -> async therefore dont have to mention unless u want it as sync
 
   ASYNC -> code wont wait for response; SYNC-> wait for the  response. preferred during tasks like signing in 
-  */
   
-
- //2. SEND THE REQUEST TO THE SERVER
+  //2. SEND THE REQUEST TO THE SERVER
   xhrRequest.send();
- }
+ */
 
-$('#fetch-dog-img-btn').click(fetchRandomDogImg); // on click 
+
+ //ajax using jquery SOLN1
+ $.ajax({
+ 	 url:'https://dog.ceo/api/breeds/image/random', 
+	 method: 'GET',
+	 success : function(data){   // method that must be called in case of a successful request.  arg-> response data obj
+       var imgUrl = data.message; // we want to extract message prop from JSON obj
+       $("#dog-img").attr('src',imgUrl); 
+	 }
+ })
+ }
+ $('#fetch-dog-img-btn').click(fetchRandomDogImg); // on click 
